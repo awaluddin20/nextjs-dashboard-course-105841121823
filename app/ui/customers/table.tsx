@@ -1,3 +1,6 @@
+// app/ui/customers/table.tsx
+
+// Impor yang dibutuhkan untuk komponen ini
 import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
@@ -5,23 +8,24 @@ import {
   CustomersTableType,
   FormattedCustomersTable,
 } from '@/app/lib/definitions';
+import { fetchFilteredCustomers } from '@/app/lib/data';
 
 export default async function CustomersTable({
-  customers,
+  query,
 }: {
-  customers: FormattedCustomersTable[];
+  query: string;
 }) {
+  // Ambil data pelanggan berdasarkan query dari fungsi fetchFilteredCustomers
+  const customers = await fetchFilteredCustomers(query);
+
   return (
     <div className="w-full">
-      <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
-        Customers
-      </h1>
-      <Search placeholder="Search customers..." />
       <div className="mt-6 flow-root">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden rounded-md bg-gray-50 p-2 md:pt-0">
               <div className="md:hidden">
+                {/* Tampilan mobile */}
                 {customers?.map((customer) => (
                   <div
                     key={customer.id}
@@ -82,8 +86,8 @@ export default async function CustomersTable({
                     </th>
                   </tr>
                 </thead>
-
                 <tbody className="divide-y divide-gray-200 text-gray-900">
+                  {/* Tampilan desktop */}
                   {customers.map((customer) => (
                     <tr key={customer.id} className="group">
                       <td className="whitespace-nowrap bg-white py-5 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
