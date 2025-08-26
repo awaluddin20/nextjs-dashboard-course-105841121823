@@ -6,13 +6,7 @@ import { CustomersTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import Search from '@/app/ui/search';
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: {
-    query?: string;
-  };
-}) {
+export default async function Page({ searchParams }) {
   const query = searchParams?.query || '';
 
   return (
