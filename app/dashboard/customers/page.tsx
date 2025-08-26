@@ -6,14 +6,14 @@ import { CustomersTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import Search from '@/app/ui/search';
 
-// Mendefinisikan tipe props secara eksplisit untuk halaman
-type PageProps = {
+// Mendefinisikan tipe props langsung di dalam argumen fungsi
+export default async function Page({
+  searchParams,
+}: {
   searchParams?: {
     query?: string;
   };
-};
-
-export default async function Page({ searchParams }: PageProps) {
+}) {
   const query = searchParams?.query || '';
 
   return (
