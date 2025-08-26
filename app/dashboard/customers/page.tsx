@@ -6,8 +6,13 @@ import { CustomersTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import Search from '@/app/ui/search';
 
-export default async function Page({ searchParams }) {
-  const query = searchParams?.query || '';
+export default async function Page({
+  // @ts-ignore
+  searchParams,
+}) {
+  // Await searchParams before accessing its properties
+  const params = await searchParams;
+  const query: string = params?.query || '';
 
   return (
     <div className="w-full">
